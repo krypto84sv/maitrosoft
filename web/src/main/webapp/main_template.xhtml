@@ -11,24 +11,28 @@
         <ui:composition template="./form_template.xhtml">
 
             <ui:define name="form_body">
-                <center>
-                    <img src="resources/img/logomaitro2.png"/>
-                </center><br/>
-                <p:toolbar>
-                    <f:facet name="left">
-                        <p:commandButton value="Cambiar password" icon="ui-icon-pencil" />
-                        <p:commandButton value="Pedidos" icon="ui-icon-plus" />
-                        <span class="ui-separator">
-                            <span class="ui-icon ui-icon-grip-dotted-vertical" />
-                        </span>
-                        <h:outputText value="#{usuarioBean.current.login} - #{usuarioBean.current.nombre}"/>
-                    </f:facet>
-                    <f:facet name="right">
-                        <p:commandButton value="Salir" icon="ui-icon-extlink" />
-                    </f:facet>
-                </p:toolbar>
-                <p:panel>
-                </p:panel>
+                <p:panelGrid>
+                    
+                
+                    <center>
+                        <img src="resources/img/logomaitro2.png"/>
+                    </center><br/>
+                    <p:toolbar>
+                        <f:facet name="left">
+                            <p:commandButton value="Cambiar password" icon="ui-icon-pencil" />
+                            <p:commandButton value="Pedidos" icon="ui-icon-plus" />
+                            <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                            </span>
+                            <h:outputText value="#{usuarioBean.current.login} - #{usuarioBean.current.nombre}"/>
+                        </f:facet>
+                        <f:facet name="right">
+                            <p:commandButton value="Salir" icon="ui-icon-extlink" action="login"/>
+                        </f:facet>
+                    </p:toolbar>
+                    <p:panel>
+                    </p:panel>
+                </p:panelGrid>
                         
                     
             </ui:define>

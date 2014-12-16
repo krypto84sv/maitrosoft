@@ -25,7 +25,49 @@
             insert into usuario(login,nombre,password,email) values('dani','Daniel Alberto',md5('dani'),'daniel_alberto84@hotmail.com')
         </sql>
     </changeSet>
-    <changeSet id="" author="">
+    
+    <changeSet id="tabla pedidos" author="dahg">
+        <createTable tableName="pedido">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="dia" type="date">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="fk_usuario" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="descripcion" type="varchar(200)"/>
+        </createTable>
+        
+        <createTable tableName="producto">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tipo" type="varchar(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="precio" type="double">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="item">
+            <column name="fk_pedido" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_usuario" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_producto" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cantidad" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        
         
     </changeSet>
 

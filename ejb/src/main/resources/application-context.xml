@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+          http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+">
+
+<context:property-placeholder location="app-config.properties"/>
+<jee:jndi-lookup id="dataSource" jndi-name="${app.datasource}"/>
+
+<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:db-changelog.xml"/>
+</bean>
+
+<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory" depends-on="liquibase">
+   <property name="jtaDataSource" ref="dataSource"/>
+   <property name="persistenceUnitName" value="maitrosoftPU"/>    
+   <property name="packagesToScan" value="com.dahg.maitrosoft.model"/>
+   <property name="jpaVendorAdapter">
+       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+           <property name="databasePlatform" value="${app.databasePlatform}"/>
+       </bean>
+   </property>
+   <property name="jpaDialect">
+       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+   </property>
+   <property name="loadTimeWeaver">
+       <bean class="org.springframework.instrument.classloading.jboss.JBossLoadTimeWeaver"/>
+   </property>
+   <property name="jpaPropertyMap" ref="jpaProperties"/>
+</bean>
+
+
+<util:map id="jpaProperties">
+    <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/> 
+    <entry key="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/> 
+</util:map>
+
+<bean class="org.springframework.transaction.jta.JtaTransactionManager" id="transactionManager"/>
+
+<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+<tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
+
+<!-- Activacion de los postprocesadores comunes. -->
+<context:annotation-config />
+
+<bean id="persistence" class="com.dahg.maitrosoft.controller.persist.SpringPersistence"/>
+
+</beans>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./form_template.xhtml">
+
+            <ui:define name="form_body">
+                <p:growl autoUpdate="true"/>
+                <p:blockUI block="loginPanel" trigger="btnAceptar">
+                    <img src="resources/img/loadicon.gif"/>
+                </p:blockUI>
+                <p:panelGrid style="margin: 0 auto" id="loginPanel">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column>Acceso de usuario</p:column>                        
+                        </p:row>
+                    </f:facet>
+                    
+                    <p:row>
+                        <p:column>
+                            <p:inputText placeholder="Login" value="#{loginBean.login}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:password placeholder="Password" value="#{loginBean.pass}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <center>
+                                <p:commandButton 
+                                    id="btnAceptar"
+                                    value="Aceptar" action="#{loginBean.authenticate}"/>
+                            </center>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

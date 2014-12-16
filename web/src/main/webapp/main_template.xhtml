@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./form_template.xhtml">
+
+            <ui:define name="form_body">
+                <center>
+                    <img src="resources/img/logomaitro2.png"/>
+                </center><br/>
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton value="Cambiar password" icon="ui-icon-pencil" />
+                        <p:commandButton value="Pedidos" icon="ui-icon-plus" />
+                        <span class="ui-separator">
+                            <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                        </span>
+                        <h:outputText value="#{usuarioBean.current.login} - #{usuarioBean.current.nombre}"/>
+                    </f:facet>
+                    <f:facet name="right">
+                        <p:commandButton value="Salir" icon="ui-icon-extlink" />
+                    </f:facet>
+                </p:toolbar>
+                <p:panel>
+                </p:panel>
+                        
+                    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

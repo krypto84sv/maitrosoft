@@ -19,7 +19,7 @@
                     </center><br/>
                     <p:toolbar>
                         <f:facet name="left">
-                            <p:commandButton value="Cambiar password" icon="ui-icon-pencil" />
+                            <p:commandButton value="Cambiar password" icon="ui-icon-pencil" action="cambiar_pass"/>
                             <p:commandButton value="Crear Evento" icon="ui-icon-plus" />
                             <p:commandButton value="Agregar pedido" icon="ui-icon-plus" />
                             <span class="ui-separator">
@@ -32,6 +32,7 @@
                         </f:facet>
                     </p:toolbar>
                     <p:panel>
+                        <ui:insert name="main_body"/>
                     </p:panel>
                 </p:panelGrid>
                         

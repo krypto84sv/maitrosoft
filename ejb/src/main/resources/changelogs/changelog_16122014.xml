@@ -64,5 +64,13 @@
             </column>
         </createTable>        
     </changeSet>
+    
+    <changeSet id="Agregar columna estado de evento" author="dahg">
+        <addColumn tableName="evento">
+            <column name="estado" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

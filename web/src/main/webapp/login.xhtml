@@ -15,6 +15,10 @@
                 <p:blockUI block="loginPanel" trigger="btnAceptar">
                     <img src="resources/img/loadicon.gif"/>
                 </p:blockUI>
+                <p:blockUI block="cu" trigger="btnRegistrar">
+                    <img src="resources/img/loadicon.gif"/>
+                </p:blockUI>
+                
                 <p:panelGrid style="margin: 0 auto" id="loginPanel">
                     <f:facet name="header">
                         <p:row>
@@ -94,7 +98,7 @@
                         <p:row>
                             <p:column colspan="2">
                                 <center>
-                                    <p:commandButton value="Aceptar" actionListener="#{registroUsuarioBean.registrar()}" update="cu"/>
+                                    <p:commandButton id="btnRegistrar" value="Aceptar" actionListener="#{registroUsuarioBean.registrar()}" update="cu"/>
                                 </center>
                             </p:column>
                         </p:row>

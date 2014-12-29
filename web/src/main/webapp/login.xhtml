@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
 
     <body>
 
@@ -40,7 +41,65 @@
                             </center>
                         </p:column>
                     </p:row>
+                    <p:row>
+                        <p:column>
+                            <center>
+                                <p:commandLink value="Registrar usuario" onclick="PF('creaUsuario').show();"/>
+                            </center>
+                        </p:column>
+                    </p:row>
                 </p:panelGrid>
+                <p:dialog widgetVar="creaUsuario" header="Registro nuevo usuario" modal="true">
+                    <p:panelGrid id="cu">
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Login ID"/>
+                            </p:column>                        
+                            <p:column>
+                                <p:inputText value="#{registroUsuarioBean.usuario.login}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Nombre"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{registroUsuarioBean.usuario.nombre}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Email"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{registroUsuarioBean.usuario.email}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Password"/>
+                            </p:column>
+                            <p:column>
+                                <p:password value="#{registroUsuarioBean.usuario.password}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Repita password"/>
+                            </p:column>
+                            <p:column>
+                                <p:password value="#{registroUsuarioBean.passTemp}"/>
+                            </p:column>
+                        </p:row>                        
+                        <p:row>
+                            <p:column colspan="2">
+                                <center>
+                                    <p:commandButton value="Aceptar" actionListener="#{registroUsuarioBean.registrar()}" update="cu"/>
+                                </center>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:dialog>
             </ui:define>
 
         </ui:composition>

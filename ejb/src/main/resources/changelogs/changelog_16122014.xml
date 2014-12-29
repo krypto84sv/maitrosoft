@@ -27,12 +27,12 @@
     </changeSet>
     
     <changeSet id="tabla pedidos" author="dahg">
-        <createTable tableName="pedido">
+        <createTable tableName="evento">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="dia" type="date">
-                <constraints nullable="false" unique="true"/>
+            <column name="dia" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="fk_usuario" type="varchar(20)">
                 <constraints nullable="true"/>
@@ -44,7 +44,7 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="tipo" type="varchar(5)">
+            <column name="descripcion" type="varchar(200)">
                 <constraints nullable="false"/>
             </column>
             <column name="precio" type="double">
@@ -52,11 +52,8 @@
             </column>
         </createTable>
         
-        <createTable tableName="item">
-            <column name="fk_pedido" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="fk_usuario" type="varchar(20)">
+        <createTable tableName="evento_producto">
+            <column name="fk_evento" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="fk_producto" type="int">
@@ -65,10 +62,7 @@
             <column name="cantidad" type="int">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
-        
-        
-        
+        </createTable>        
     </changeSet>
 
 </databaseChangeLog>

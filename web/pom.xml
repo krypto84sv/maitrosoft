@@ -108,7 +108,7 @@
                    <artifactId>slf4j-api</artifactId>
                </exclusion>
            </exclusions>
-       </dependency>
+       </dependency>      
 
    </dependencies>
 

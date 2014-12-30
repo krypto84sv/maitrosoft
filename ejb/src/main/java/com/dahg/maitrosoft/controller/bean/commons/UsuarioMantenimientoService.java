@@ -9,8 +9,6 @@ import com.dahg.maitrosoft.controller.bean.AbstractSingleEntityBean;
 import com.dahg.maitrosoft.controller.exceptions.ControllerException;
 import com.dahg.maitrosoft.controller.services.commons.IUsuarioMantenimientoService;
 import com.dahg.maitrosoft.model.Usuario;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -71,6 +69,17 @@ public class UsuarioMantenimientoService extends AbstractSingleEntityBean<Usuari
             }
         }
         throw new ControllerException("Usuario "+usuario.getLogin()+" ya existe");
+    }
+
+    @Override
+    public void cambioPass(Usuario usuario) throws ControllerException {
+        try {
+            String passEncrypt = getEncrypt().hash(usuario.getPassword());
+            usuario.setPassword(passEncrypt);
+            persist(usuario);
+        } catch (Exception ex) {
+            throw new ControllerException(ex);
+        }
     }
 
     

@@ -1,14 +1,45 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
 
     <body>
 
         <ui:composition template="./main_template.xhtml">
 
             <ui:define name="main_body">
-                main_body
+                <p:growl autoUpdate="true" showDetail="true" showSummary="true"/>
+                <p:blockUI block="frm_change" trigger="btnAceptar">
+                    <img src="resources/img/loadicon.gif"/>
+                </p:blockUI>
+                <p:panelGrid id="frm_change" style="margin: 0 auto">
+                    <p:row>
+                        <p:column colspan="2">
+                            <h:outputText value="Cambio de pass para #{usuarioBean.current.nombre}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column><h:outputText value="Escriba nuevo password"/></p:column>
+                        <p:column>
+                            <p:password id="pw1" value="#{cambioPassBean.pass}" match="pw2" label="password 1" required="true"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column><h:outputText value="Repita nuevo password"/></p:column>
+                        <p:column><p:password id="pw2" value="#{cambioPassBean.pass}" label="password 2" required="true"/></p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">
+                            <center>
+                                <p:commandButton id="btnAceptar" value="Aceptar" actionListener="#{cambioPassBean.cambio()}"
+                                                 process="pw1,pw2,@this" update="frm_change"
+                                                 />
+                            </center>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
             </ui:define>
 
         </ui:composition>

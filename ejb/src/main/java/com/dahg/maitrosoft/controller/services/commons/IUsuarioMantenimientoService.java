@@ -19,4 +19,5 @@ public interface IUsuarioMantenimientoService extends IService<Usuario>{
     
     Usuario checkIfExist(String login) throws ControllerException;
     void registrarUsuario(Usuario usuario) throws ControllerException;
+    void cambioPass(Usuario usuario) throws ControllerException;
 }

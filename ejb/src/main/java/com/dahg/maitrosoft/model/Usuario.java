@@ -1,7 +1,10 @@
 package com.dahg.maitrosoft.model;
 
+import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -10,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable {
     
     @Id
     private String login;
@@ -18,6 +21,9 @@ public class Usuario {
     private String password;
     private String email;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Evento> eventos;
+    
     public String getLogin() {
         return login;
     }
@@ -48,6 +54,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
     }
     
     

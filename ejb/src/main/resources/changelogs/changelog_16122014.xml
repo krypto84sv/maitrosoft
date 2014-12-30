@@ -72,5 +72,33 @@
             </column>
         </addColumn>
     </changeSet>
+    
+    <changeSet id="catalogo productos" author="dahg">
+        <insert tableName="producto">
+            <column name="descripcion" value="Pupa FQ Maiz"/>
+            <column name="precio" value="0.80"/>
+        </insert>
+        <insert tableName="producto">
+            <column name="descripcion" value="Pupa FQ Arroz"/>
+            <column name="precio" value="0.80"/>
+        </insert>
+        <insert tableName="producto">
+            <column name="descripcion" value="Pupa Revuelva Maiz"/>
+            <column name="precio" value="0.70"/>
+        </insert>
+        <insert tableName="producto">
+            <column name="descripcion" value="Pupa Revuelva Arroz"/>
+            <column name="precio" value="0.70"/>
+        </insert>
+        <insert tableName="producto">
+            <column name="descripcion" value="Pupa Queso Arroz"/>
+            <column name="precio" value="0.90"/>
+        </insert>
+        <insert tableName="producto">
+            <column name="descripcion" value="Pupa Queso Maiz"/>
+            <column name="precio" value="0.90"/>
+        </insert>
+        
+    </changeSet>
 
 </databaseChangeLog>

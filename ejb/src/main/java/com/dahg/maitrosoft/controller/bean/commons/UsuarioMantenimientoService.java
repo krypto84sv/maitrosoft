@@ -46,7 +46,7 @@ public class UsuarioMantenimientoService extends AbstractSingleEntityBean<Usuari
         Usuario usuario = null;
         try {
             Query query = getTypedQuery(selectEquals);
-            usuario = (Usuario ) query.getSingleResult();
+            usuario = (Usuario) query.getSingleResult();
         }
         catch (NoResultException ex) {
             throw new ControllerException(ex,"Usuario no existe");

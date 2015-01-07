@@ -11,21 +11,20 @@
         <ui:composition template="./form_template.xhtml">
 
             <ui:define name="form_body">
-                <p:panelGrid>
-                    
-                
+                <p:panelGrid>                
                     <!--<center>
                         <img src="resources/img/logomaitro2.png"/>
                     </center><br/>-->
                     <p:toolbar>
                         <f:facet name="left">
                             <p:commandButton value="Cambiar password" icon="ui-icon-pencil" action="cambiar_pass" process="@this"/>
-                            <p:commandButton value="Mis Eventos" icon="ui-icon-plus" process="@this" action="eventos"/>
+                            <p:commandButton value="Mis Eventos" icon="ui-icon-calendar" process="@this" action="eventos"/>
+                            <p:commandButton value="Mis Pedidos" icon="ui-icon-clipboard" process="@this" action="eventos"/>
                             <p:commandButton value="Agregar pedido" icon="ui-icon-plus" process="@this"/>
                             <span class="ui-separator">
                                 <span class="ui-icon ui-icon-grip-dotted-vertical" />
                             </span>
-                            <h:outputText value="#{usuarioBean.current.login} - #{usuarioBean.current.nombre}"/>
+                            <h:outputText value="[#{usuarioBean.current.login}] #{usuarioBean.current.nombre}"/>
                         </f:facet>
                         <f:facet name="right">
                             <p:commandButton value="Salir" icon="ui-icon-extlink" action="login" process="@this"/>

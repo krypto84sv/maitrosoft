@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -20,8 +24,12 @@ public class Usuario implements Serializable {
     private String nombre;
     private String password;
     private String email;
-
-    @OneToMany(mappedBy = "usuario")
+    
+    @ManyToMany
+    @JoinTable(name="evento_producto",
+         joinColumns={@JoinColumn(name="fk_usuario")},
+         inverseJoinColumns={@JoinColumn(name="fk_evento")})
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<Evento> eventos;
     
     public String getLogin() {

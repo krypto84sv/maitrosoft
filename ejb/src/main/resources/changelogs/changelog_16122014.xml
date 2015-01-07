@@ -100,5 +100,24 @@
         </insert>
         
     </changeSet>
+    <changeSet id="Agregar columna usuario a item por evento" author="dahg">
+        <addColumn tableName="evento_producto">
+            <column name="fk_usuario" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+        
+        <addForeignKeyConstraint baseTableName="evento_producto" 
+                                 baseColumnNames="fk_evento" constraintName="evtp_evento" 
+                                 referencedTableName="evento" referencedColumnNames="id"/>
+        
+        <addForeignKeyConstraint baseTableName="evento_producto" 
+                                 baseColumnNames="fk_producto" constraintName="evtp_producto" 
+                                 referencedTableName="producto" referencedColumnNames="id"/>
+        
+        <addForeignKeyConstraint baseTableName="evento_producto" 
+                                 baseColumnNames="fk_usuario" constraintName="evtp_usuario" 
+                                 referencedTableName="usuario" referencedColumnNames="login"/>
+    </changeSet>
 
 </databaseChangeLog>

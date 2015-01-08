@@ -10,27 +10,20 @@
 
         <ui:composition template="./main_template.xhtml">            
             <ui:define name="main_body">
-                <p:panelGrid style="margin: 0 auto">
-                    
-                    <h:outputText value="Eventos organizados por #{usuarioBean.current.nombre}"/>
-                    <p:commandButton value="Agregar Evento" icon="ui-icon-plus"/>
-
-                    <p:dataTable value="#{usuarioBean.current.misEventos}" var="evento">
-                        <f:facet name="header">
-
-                        </f:facet>
-                        <p:column headerText="Descripcion">
-                            <h:outputText value="#{evento.descripcion}"/>
-                        </p:column>
-                        <p:column headerText="Fecha">
-                            <p:calendar value="#{evento.dia}" pattern="dd/MM/yyyy HH:mm" disabled="true"/>
-                        </p:column>
-                        <p:column headerText="Estado">
-                            <h:outputText value="#{evento.estado?'Activo':'Inactivo'}"/>
-                        </p:column>
-                    </p:dataTable>
-                        
-                </p:panelGrid>
+                
+                <p:dataGrid value="#{usuarioBean.current.misEventos}" var="evento" columns="3" rows="12">
+                    <f:facet name="header">
+                        <h:outputText value="Eventos organizados por #{usuarioBean.current.nombre}"/>
+                    </f:facet>
+                    <p:column>
+                        <p:panel header="#{evento.descripcion}" style="text-align:center">
+                            <h:panelGrid columns="2">
+                                <p:commandButton icon="#{evento.estado?'ui-icon-check':'ui-icon-close'}"/>
+                                <p:calendar value="#{evento.dia}" pattern="dd/MM/yyyy HH:mm" disabled="true"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:column>
+                </p:dataGrid>
             </ui:define>
 
         </ui:composition>

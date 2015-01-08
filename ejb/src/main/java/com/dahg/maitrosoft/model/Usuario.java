@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -31,6 +33,10 @@ public class Usuario implements Serializable {
          inverseJoinColumns={@JoinColumn(name="fk_evento")})
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<Evento> eventos;
+    
+    @OneToMany(mappedBy = "responsable")
+    @OrderBy("dia desc")
+    private List<Evento> misEventos;
     
     public String getLogin() {
         return login;
@@ -70,6 +76,14 @@ public class Usuario implements Serializable {
 
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
+    }
+
+    public List<Evento> getMisEventos() {
+        return misEventos;
+    }
+
+    public void setMisEventos(List<Evento> misEventos) {
+        this.misEventos = misEventos;
     }
     
     

@@ -2,17 +2,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
-        <ui:composition template="./main_template.xhtml">
-
+        <ui:composition template="./main_template.xhtml">            
             <ui:define name="main_body">
-                <p:panelGrid id="frm_change" style="margin: 0 auto">
-                    <p:dataTable value="#{usuarioBean.current.eventos}" var="evento">
-                        
+                <p:panelGrid style="margin: 0 auto">
+                    
+                    <h:outputText value="Eventos organizados por #{usuarioBean.current.nombre}"/>
+                    <p:commandButton value="Agregar Evento" icon="ui-icon-plus"/>
+
+                    <p:dataTable value="#{usuarioBean.current.misEventos}" var="evento">
+                        <f:facet name="header">
+
+                        </f:facet>
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{evento.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="Fecha">
+                            <p:calendar value="#{evento.dia}" pattern="dd/MM/yyyy HH:mm" disabled="true"/>
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{evento.estado?'Activo':'Inactivo'}"/>
+                        </p:column>
                     </p:dataTable>
+                        
                 </p:panelGrid>
             </ui:define>
 

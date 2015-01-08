@@ -5,6 +5,9 @@
  */
 package com.dahg.maitrosoft.controller.services.eventos;
 
+import com.dahg.maitrosoft.model.Evento;
+import com.dahg.maitrosoft.model.Usuario;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,4 +16,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface IEventoService {
+    List<Evento> getEventosActivos(Usuario usuario);
 }

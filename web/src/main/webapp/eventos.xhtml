@@ -11,14 +11,16 @@
         <ui:composition template="./main_template.xhtml">            
             <ui:define name="main_body">
                 
-                <p:dataGrid value="#{usuarioBean.current.misEventos}" var="evento" columns="3" rows="12">
+                <p:dataGrid id="eventosBody" value="#{usuarioBean.current.misEventos}" var="evento" columns="3" rows="12">
                     <f:facet name="header">
                         <h:outputText value="Eventos organizados por #{usuarioBean.current.nombre}"/>
                     </f:facet>
                     <p:column>
                         <p:panel header="#{evento.descripcion}" style="text-align:center">
                             <h:panelGrid columns="2">
-                                <p:commandButton icon="#{evento.estado?'ui-icon-check':'ui-icon-close'}"/>
+                                <p:commandButton icon="#{evento.estado?'ui-icon-check':'ui-icon-close'}"
+                                                 update="@this"
+                                                 actionListener="#{eventosBean.actualizaEvento(evento)}"/>
                                 <p:calendar value="#{evento.dia}" pattern="dd/MM/yyyy HH:mm" disabled="true"/>
                             </h:panelGrid>
                         </p:panel>

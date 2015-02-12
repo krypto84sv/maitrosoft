@@ -37,6 +37,11 @@ public class EventosBean extends AbstractManagedBean {
         refreshList();
     }
     
+    public void actualizaEvento(Evento evt) {
+        evt.setEstado(!evt.getEstado());
+        service.merge(evt);
+    }
+    
     private void refreshList() {
         if(eventos!=null) {
             eventos.clear();

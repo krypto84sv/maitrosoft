@@ -17,8 +17,23 @@
                 <p:panelGrid id="frm_change" style="margin: 0 auto">
                     <p:row>
                         <p:column colspan="2">
-                            <h:outputText value="Cambio de pass para #{usuarioBean.current.nombre}"/>
+                            <h:outputText value="Editar datos para #{usuarioBean.current.login}"/>
                         </p:column>
+                    </p:row>
+                    <p:row>
+                    	<p:column><h:outputText value="Nombre"/></p:column>
+                    	<p:column><h:inputText id="nombre" value="#{usuarioBean.current.nombre}" required="true" label="Email"/></p:column>
+                    </p:row>
+                    <p:row>
+                    	<p:column><h:outputText value="Email"/></p:column>
+                    	<p:column><h:inputText id="email" value="#{usuarioBean.current.email}" required="true" label="Email"/></p:column>
+                    </p:row>
+                    <p:row>
+                    	<p:column colspan="2">
+                    		<center>
+                    			<p:commandButton value="Guardar" actionListener="#{cambioPassBean.editar()}" process="nombre,email,@this" update="frm_change,ctrUsr"/>
+                    		</center>
+                    	</p:column>
                     </p:row>
                     <p:row>
                         <p:column><h:outputText value="Escriba nuevo password"/></p:column>

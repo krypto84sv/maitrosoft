@@ -41,6 +41,13 @@ public class CambioPassBean extends AbstractManagedBean {
         }
     }
     
+    public void editar() {
+    	Usuario usr = usuarioBean.getCurrent();                	
+        servicio.merge(usr);
+        pass="";
+        info("Cambio guardado");
+    }
+    
     public UsuarioBean getUsuarioBean() {
         return usuarioBean;
     }

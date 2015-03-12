@@ -38,10 +38,9 @@ public class LoginBean extends AbstractManagedBean {
     }
     
     public String authenticate() {        
-        try {
+        try {        	
             if(login==null || login.isEmpty()) throw new ControllerException("Debe ingresar el login");
-            if(pass==null || pass.isEmpty()) throw new ControllerException("Debe ingresar el password");            
-            
+            if(pass==null || pass.isEmpty()) throw new ControllerException("Debe ingresar el password");
             Usuario usuario = authService.auth(login, pass);            
             usuarioBean.setCurrent(usuario);
         } catch (ControllerException ex) {

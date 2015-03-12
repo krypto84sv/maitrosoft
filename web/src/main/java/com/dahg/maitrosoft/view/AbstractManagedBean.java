@@ -12,10 +12,10 @@ import javax.faces.context.FacesContext;
  *
  * @author dahg
  */
-public class AbstractManagedBean {
+public abstract class AbstractManagedBean {
     
     public AbstractManagedBean() {
-        //TODO: Agregar log4j
+        //Se usa log4j integrado en JBOSS
     }
     
     protected FacesContext getCurrentFacesContext() {

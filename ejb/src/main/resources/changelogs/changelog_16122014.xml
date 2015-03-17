@@ -119,5 +119,30 @@
                                  baseColumnNames="fk_usuario" constraintName="evtp_usuario" 
                                  referencedTableName="usuario" referencedColumnNames="login"/>
     </changeSet>
+    <changeSet author="dahg" id="Eliminar usuario de asociacion evento-producto">
+    	<dropForeignKeyConstraint baseTableName="evento_producto" constraintName="evtp_usuario"/>
+    	<dropColumn tableName="evento_producto" columnName="fk_usuario"/>
+    	<dropForeignKeyConstraint baseTableName="evento_producto" constraintName="evtp_producto"/>
+    	<dropColumn tableName="evento_producto" columnName="fk_producto"/>
+    	<addColumn tableName="evento_producto">
+    		<column name="producto" type="varchar(200)">
+    			<constraints nullable="false"/>
+    		</column>
+    	</addColumn>
+    	
+    	<addColumn tableName="evento_producto">
+    		<column name="precio" type="double">
+    			<constraints nullable="false"/>
+    		</column>
+    	</addColumn>
+    	
+    	<dropTable tableName="producto"/>
+    	<addColumn tableName="evento_producto">
+	    	<column name="id" type="int" autoIncrement="true">
+	    			<constraints nullable="false" primaryKey="true"/>
+    		</column>
+    	</addColumn>
+    	
+    </changeSet>
 
 </databaseChangeLog>

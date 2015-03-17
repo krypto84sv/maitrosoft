@@ -27,12 +27,6 @@ public class Usuario implements Serializable {
     private String password;
     private String email;
     
-    @ManyToMany
-    @JoinTable(name="evento_producto",
-         joinColumns={@JoinColumn(name="fk_usuario")},
-         inverseJoinColumns={@JoinColumn(name="fk_evento")})
-    @LazyCollection(LazyCollectionOption.TRUE)
-    private List<Evento> eventos;
     
     @OneToMany(mappedBy = "responsable")
     @OrderBy("dia desc")
@@ -68,14 +62,6 @@ public class Usuario implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
     }
 
     public List<Evento> getMisEventos() {

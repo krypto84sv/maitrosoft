@@ -8,6 +8,7 @@ package com.dahg.maitrosoft.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -27,7 +29,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "evento")
-public class Evento implements Serializable {
+public class Evento implements Serializable, Cloneable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,14 +44,6 @@ public class Evento implements Serializable {
     private String descripcion;
     private Boolean estado;
     
-    @ManyToMany(mappedBy="eventos")
-    @LazyCollection(LazyCollectionOption.TRUE)
-    private List<Producto> productos;
-    
-    @ManyToMany(mappedBy="eventos")
-    @LazyCollection(LazyCollectionOption.TRUE)
-    private List<Usuario> usuarios;
-
     public Integer getId() {
         return id;
     }
@@ -82,14 +76,6 @@ public class Evento implements Serializable {
         this.estado = estado;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
-
     public Usuario getResponsable() {
         return responsable;
     }
@@ -98,13 +84,19 @@ public class Evento implements Serializable {
         this.responsable = responsable;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
+	@Override
+	protected Evento clone() throws CloneNotSupportedException {
+		Evento clon = new Evento();
+		clon.setDescripcion(getDescripcion());
+		clon.setDia(getDia());
+		clon.setEstado(getEstado());
+		clon.setResponsable(getResponsable());
+		
+		
+	
+		return clon;
+		
+	}
 
 
 }

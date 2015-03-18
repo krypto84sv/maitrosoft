@@ -9,12 +9,16 @@ import com.dahg.maitrosoft.controller.services.eventos.IEventoService;
 import com.dahg.maitrosoft.model.Evento;
 import com.dahg.maitrosoft.view.AbstractManagedBean;
 import com.dahg.maitrosoft.view.usuario.UsuarioBean;
+
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+
+import org.primefaces.event.CellEditEvent;
 
 /**
  *
@@ -37,18 +41,18 @@ public class EventosBean extends AbstractManagedBean {
         refreshList();
     }
     
-    public void actualizaEvento(Evento evt) {
-        evt.setEstado(!evt.getEstado());
-        service.merge(evt);
+    public void actualizaEvento(CellEditEvent evt) {
+        Evento evento = (Evento) evt.getNewValue();
+        service.merge(evento);
     }
     
     private void refreshList() {
         if(eventos!=null) {
             eventos.clear();
-            eventos.addAll(service.getEventosActivos(usuarioBean.getCurrent()));
+            eventos.addAll(service.getEventosActivos());
         }
         else
-            eventos = service.getEventosActivos(usuarioBean.getCurrent());
+            eventos = service.getEventosActivos();
     }
 
     public void setUsuarioBean(UsuarioBean usuarioBean) {

@@ -17,5 +17,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface IEventoService extends IService<Evento>{
-    List<Evento> getEventosActivos(Usuario usuario);
+    List<Evento> getEventosActivos();
 }

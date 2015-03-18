@@ -30,6 +30,7 @@ public class Usuario implements Serializable {
     
     @OneToMany(mappedBy = "responsable")
     @OrderBy("dia desc")
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<Evento> misEventos;
     
     public String getLogin() {

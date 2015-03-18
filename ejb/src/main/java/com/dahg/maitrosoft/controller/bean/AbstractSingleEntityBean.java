@@ -7,13 +7,17 @@ package com.dahg.maitrosoft.controller.bean;
 
 
 import com.dahg.maitrosoft.controller.services.IService;
+
 import java.util.List;
+import java.util.UUID;
+
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -89,4 +93,5 @@ public abstract class AbstractSingleEntityBean<T> extends AbstractBasic implemen
         
         return getTypedQuery(selectLike).getResultList();
     }
+    
 }

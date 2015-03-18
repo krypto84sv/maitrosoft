@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+    
+    <changeSet id="creacion tabla usuario" author="dahg">
+        
+        <createTable tableName="usuario">
+            <column name="login" type="varchar(20)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nombre" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="usuario root" author="dahg">
+        <sql>
+            insert into usuario(login,nombre,password,email) values('dani','Daniel Alberto',md5('dani'),'daniel_alberto84@hotmail.com')
+        </sql>
+    </changeSet>
+    
+    <changeSet id="tabla eventos y producto" author="dahg">
+        
+        <createTable tableName="evento">
+            <column name="id" type="varchar(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="dia" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_usuario" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="descripcion" type="varchar(200)"/>
+        </createTable>
+        
+        <createTable tableName="producto">
+        	<column name="id" type="varchar(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fk_evento" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descripcion" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>        
+    </changeSet>
+    
+    <changeSet id="Agregar columna estado de evento" author="dahg">
+        <addColumn tableName="evento">
+            <column name="estado" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
+        
+    <changeSet id="Agregar foreign key a producto" author="dahg">        
+        
+        <addForeignKeyConstraint baseTableName="producto" 
+                                 baseColumnNames="fk_evento" constraintName="evtp_evento" 
+                                 referencedTableName="evento" referencedColumnNames="id"/>        
+        
+    </changeSet>
+    
+    <changeSet author="dahg" id="Agregar columna precio a evento-producto">
+    	
+    	
+    	<addColumn tableName="producto">
+    		<column name="precio" type="double">
+    			<constraints nullable="false"/>
+    		</column>
+    	</addColumn>
+    	
+    	
+    </changeSet>
+    
+    <changeSet author="dahg" id="Crear llave foranea evento - usuario">
+    	
+    	<addForeignKeyConstraint constraintName="evento-usuario" baseTableName="evento" baseColumnNames="fk_usuario"  
+    														referencedTableName="usuario" referencedColumnNames="login"/>
+		
+		<createTable tableName="pedido">
+			<column name="id" type="varchar(36)">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="fk_producto" type="varchar(36)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="cantidad" type="int">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+															  
+		<addColumn tableName="pedido">
+			<column name="fk_usuario" type="varchar(20)">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+		
+    	<addForeignKeyConstraint constraintName="pedido-usuario" baseTableName="pedido" baseColumnNames="fk_usuario"  
+    														referencedTableName="usuario" referencedColumnNames="login"/>		
+    </changeSet>
+
+</databaseChangeLog>

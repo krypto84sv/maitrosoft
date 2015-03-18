@@ -3,5 +3,5 @@
     <preConditions>
         <dbms type="mysql" />
     </preConditions>
-    <include file="changelogs/changelog_16122014.xml"/>    
+    <include file="changelogs/changelog_17032015.xml"/>    
 </databaseChangeLog>

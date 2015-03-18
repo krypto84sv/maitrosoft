@@ -24,7 +24,7 @@ public class AuthenticateService extends AbstractBasic implements IAuthenticateS
     private IUsuarioMantenimientoService usuarioService;
     
     @Override
-    public Usuario auth(String login, String pass) throws ControllerException {
+    public Usuario auth(String login, String pass) throws ControllerException {    	
         getEntityManager().clear();
         Usuario usuario = usuarioService.checkIfExist(login);
         String passEncrypt="";

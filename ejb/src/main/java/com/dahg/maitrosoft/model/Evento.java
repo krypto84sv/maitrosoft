@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -32,8 +33,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class Evento implements Serializable, Cloneable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy="uuid")
+    private String id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dia;
     
@@ -44,11 +46,11 @@ public class Evento implements Serializable, Cloneable {
     private String descripcion;
     private Boolean estado;
     
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

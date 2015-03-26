@@ -19,6 +19,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -41,9 +42,19 @@ public class EventosBean extends AbstractManagedBean {
         refreshList();
     }
     
-    public void actualizaEvento(CellEditEvent evt) {
-        Evento evento = (Evento) evt.getNewValue();
+    public void actualizaEvento(RowEditEvent evt) {    	
+        Evento evento = (Evento) evt.getObject();
         service.merge(evento);
+    }
+    
+    public void agregar() {
+    	Evento nuevoEvento = new Evento();
+    	nuevoEvento.setDescripcion("[digite descripcion]");
+    	nuevoEvento.setDia(new java.util.Date());
+    	nuevoEvento.setEstado(Boolean.FALSE);
+    	nuevoEvento.setResponsable(usuarioBean.getCurrent());    	
+    	usuarioBean.getCurrent().getMisEventos().add(nuevoEvento);
+    	usuarioBean.guardar();    	
     }
     
     private void refreshList() {

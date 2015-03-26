@@ -35,7 +35,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="fk_usuario" type="varchar(20)">
-                <constraints nullable="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="descripcion" type="varchar(200)"/>
         </createTable>

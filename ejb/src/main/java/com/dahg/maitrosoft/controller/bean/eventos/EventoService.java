@@ -28,6 +28,7 @@ public class EventoService extends AbstractSingleEntityBean<Evento> implements I
 
     @Override
     public List<Evento> getEventosActivos() {
+    	getEntityManager().clear();
         String consulta ="select e from Evento e where e.estado=true order by e.dia desc";
         Query query = getEntityManager().createQuery(consulta);
         List<Evento> lista = new ArrayList<Evento>();

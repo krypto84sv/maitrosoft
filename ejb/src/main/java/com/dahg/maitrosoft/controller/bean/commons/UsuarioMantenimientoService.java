@@ -82,6 +82,12 @@ public class UsuarioMantenimientoService extends AbstractSingleEntityBean<Usuari
         }
     }
 
+	@Override
+	public void refreschar(Usuario usuario) {
+		getEntityManager().refresh(usuario);
+		
+	}
+
     
     
     

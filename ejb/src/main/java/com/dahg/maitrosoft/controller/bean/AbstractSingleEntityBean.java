@@ -38,7 +38,7 @@ public abstract class AbstractSingleEntityBean<T> extends AbstractBasic implemen
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly=false)
     public void persist(T obj) {
         getEntityManager().persist(obj);
     }

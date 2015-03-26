@@ -5,7 +5,10 @@
  */
 package com.dahg.maitrosoft.view.usuario;
 
+import com.dahg.maitrosoft.controller.services.commons.IUsuarioMantenimientoService;
 import com.dahg.maitrosoft.model.Usuario;
+
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -18,6 +21,8 @@ import javax.faces.bean.SessionScoped;
 public class UsuarioBean {
     
     private Usuario current;
+    @EJB
+    private IUsuarioMantenimientoService servicio;
 
     public Usuario getCurrent() {
         return current;
@@ -26,6 +31,12 @@ public class UsuarioBean {
     public void setCurrent(Usuario current) {
         this.current = current;
     }
+    
+    public void guardar() {
+    	servicio.merge(getCurrent());
+    	//servicio.refreschar(getCurrent());
+    }
+    
     
     
 }

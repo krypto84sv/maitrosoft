@@ -11,26 +11,53 @@
         <ui:composition template="./main_template.xhtml">            
             <ui:define name="main_body">
 			    
+                <p:commandButton value="Agregar" icon="ui-icon-plus" actionListener="#{eventosBean.agregar()}" update="tablaEventos"/>
                 
-                
-                <p:dataTable  value="#{usuarioBean.current.misEventos}" var="evento" >
-                	
-                	<p:column headerText="Descripcion">
-        				<h:outputText value="#{evento.descripcion}"/>
-                	</p:column>
-                	
-                	<p:column headerText="Dia">
-           				<h:outputText value="#{evento.dia}">
-           					<f:convertDateTime pattern="dd/MM/yyyy HH:mm a"/>
-           				</h:outputText>
-                	</p:column>
-                	
-                	<p:column headerText="Estado">
-           				<h:outputText value="#{evento.estado?'ACTIVO':'CANCELADO'}" />
-                	</p:column>
-                    
-                </p:dataTable>
-	                
+      			<p:dataTable id="tablaEventos" value="#{usuarioBean.current.misEventos}" var="evento" editable="true">
+             		<p:ajax event="rowEdit" listener="#{eventosBean.actualizaEvento}"/>
+             		
+	               	<p:column headerText="Descripcion">
+	               		<p:cellEditor>
+	               			<f:facet name="output">
+	               				<h:outputText value="#{evento.descripcion}"/>
+	               			</f:facet>
+	               			<f:facet name="input">
+	               				<h:inputText value="#{evento.descripcion}"/>
+	               			</f:facet>	       				
+	       				</p:cellEditor>
+	               	</p:column>
+	               	
+	               	<p:column headerText="Dia">
+	               			<p:cellEditor>
+	               				<f:facet name="output">
+	               					<p:calendar value="#{evento.dia}" pattern="dd/MM/yyyy HH:mm a" showOn="button" disabled="true"/>
+	               				</f:facet>
+	               				<f:facet name="input">
+	               					<p:calendar value="#{evento.dia}" pattern="dd/MM/yyyy HH:mm a" showOn="button"/>
+	               				</f:facet>
+	               			</p:cellEditor>
+	          				
+	               	</p:column>
+	               	
+	               	<p:column headerText="Estado">
+	               			<p:cellEditor>
+	               				<f:facet name="output">
+	               					<h:outputText value="#{evento.estado?'ACTIVO':'CANCELADO'}" />	
+	               				</f:facet>
+	               				<f:facet name="input">
+	               					<p:selectBooleanButton value="#{evento.estado}" onLabel="ACTIVO" offLabel="CANCELADO" />
+	               				</f:facet>
+	               			</p:cellEditor>
+	          				
+	               	</p:column>
+	               	
+	               	<p:column headerText="Opciones">
+	               		<p:rowEditor />
+	               	</p:column>
+                   
+               </p:dataTable>
+               
+	               
                 
             </ui:define>
 
